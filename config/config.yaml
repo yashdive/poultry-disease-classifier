@@ -1,0 +1,8 @@
+artifacts_root: artifacts         # folder where all artifacts/outputs like dataset, models, logs will be stored
+
+
+data_ingestion:                   #working dir for data ingestion steps
+  root_dir: artifacts/data_ingestion
+  source_URL: https://github.com/entbappy/Branching-tutorial/raw/master/Chicken-fecal-images.zip
+  local_data_file: artifacts/data_ingestion/data.zip                            # where to save
+  unzip_dir: artifacts/data_ingestion         #where to unzip the data
