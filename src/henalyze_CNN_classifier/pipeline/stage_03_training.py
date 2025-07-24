@@ -1,5 +1,10 @@
 
 
+import os
+import sys
+
+
+sys.path.append(os.path.abspath("src"))
 
 
 from henalyze_CNN_classifier.components.prepare_callbacks import PrepareCallback

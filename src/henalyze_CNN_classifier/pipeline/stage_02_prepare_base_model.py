@@ -1,3 +1,9 @@
+
+import os
+import sys
+
+
+sys.path.append(os.path.abspath("src"))
 from henalyze_CNN_classifier import logger
 from henalyze_CNN_classifier.components.prepare_base_model import PrepareBaseModel
 from henalyze_CNN_classifier.config.configuration import ConfigurationManager
