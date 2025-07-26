@@ -90,7 +90,7 @@ jobs:
          
       # - name: Stop and remove container if running
       #   run: |
-      #    docker ps -q --filter "name=henalyze" | grep -q . && docker stop henalyze && docker rm -fv henalyze
+      #    docker ps -q --filter "name=henalyze" | grep -q . && docker stop henalyze && docker rm -fv henalyzee
        
       - name: Run Docker Image to serve users
         run: |
@@ -98,3 +98,4 @@ jobs:
       - name: Clean previous images and containers
         run: |
          docker system prune -f
+         
