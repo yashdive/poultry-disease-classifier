@@ -1,119 +1,135 @@
-# Chicken-Disease-Classification--Project
+# 🐔 Henalyze(Poultry disease classifier)
 
-# How to run?
-### STEPS:
+A Deep Learning-based image classification system to identify poultry diseases using chicken images. This project uses a Convolutional Neural Network (CNN) architecture based on **VGG16**, trained to distinguish between healthy and diseased chickens. It also includes an end-to-end CI/CD pipeline with Docker, GitHub Actions, AWS ECR, and EC2 for deployment.
 
-Clone the repository
+---
+
+## 📌 Project Highlights
+
+- 🔍 **Problem**: Identify diseases in chickens based on image input.
+- 🧠 **Model Used**: Transfer Learning with **VGG16**.
+- 📦 **Frameworks**: TensorFlow, Keras, Flask.
+- 🐍 **Language**: Python
+- 🐳 **Deployment Stack**: Docker, AWS ECR, EC2, GitHub Actions.
+
+---
+
+## 📈 Model Performance
+
+| Metric    | Value     |
+|-----------|-----------|
+| Accuracy  | 90.51%    |
+| Loss      | 0.6722    |
+
+---
+
+## 🛠️ How to Run Locally
+
+### STEP 1: Clone the repository
 
 ```bash
-https://github.com/entbappy/Chicken-Disease-Classification--Project
+git clone https://github.com/yashdive/poultry-disease-classifier
+cd Poultry-Disease-Classfier
 ```
-### STEP 01- Create a conda environment after opening the repository
+
+### STEP 2: Create a conda environment
 
 ```bash
 conda create -n cnncls python=3.8 -y
-```
-
-```bash
 conda activate cnncls
 ```
 
+### STEP 3: Install the requirements
 
-### STEP 02- install the requirements
 ```bash
 pip install -r requirements.txt
 ```
 
+### STEP 4: Run the application
 
 ```bash
-# Finally run the following command
 python app.py
 ```
 
-Now,
+Then open your browser and go to:
+
 ```bash
-open up you local host and port
+http://localhost:5000
 ```
 
+---
 
-### DVC cmd
+## 📦 DVC Commands (If using Data Version Control)
 
-1. dvc init
-2. dvc repro
-3. dvc dag
+```bash
+dvc init
+dvc repro
+dvc dag
+```
 
+---
 
+## 🚀 CI/CD Deployment on AWS with GitHub Actions
 
-# AWS-CICD-Deployment-with-Github-Actions
+This project uses a production-grade CI/CD pipeline to automate deployment to AWS EC2 using Docker and ECR.
 
-## 1. Login to AWS console.
+### Step-by-Step Pipeline
 
-## 2. Create IAM user for deployment
+1. ✅ **Login to AWS Console**
+2. 🔑 **Create IAM User** with:
+   - `AmazonEC2ContainerRegistryFullAccess`
+   - `AmazonEC2FullAccess`
 
-	#with specific access
+3. 📦 **Create an ECR Repository**  
+   Save the URI for Docker image (e.g.):
+   ```
+   566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
+   ```
 
-	1. EC2 access : It is virtual machine
+4. 🖥️ **Launch EC2 Instance** (Ubuntu)
 
-	2. ECR: Elastic Container registry to save your docker image in aws
+5. 🐳 **Install Docker in EC2**
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
 
+6. 🏃‍♂️ **Configure EC2 as GitHub Self-hosted Runner**
+- Go to `GitHub > Settings > Actions > Runners > New self-hosted runner`
+- Follow the steps and run commands on EC2
 
-	#Description: About the deployment
+7. 🔐 **Add GitHub Secrets** (in repo settings):
+```
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=us-east-1
+AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.us-east-1.amazonaws.com
+ECR_REPOSITORY_NAME=chicken
+```
 
-	1. Build docker image of the source code
+---
 
-	2. Push your docker image to ECR
+## 📌 Summary of What I Did
 
-	3. Launch Your EC2 
+- Built a poultry disease classification model using transfer learning with VGG16.
+- Achieved high accuracy of 90%+ on the validation dataset.
+- Built a web app using Flask to serve model predictions.
+- Containerized the application with Docker.
+- Automated the full deployment pipeline using GitHub Actions, ECR, and EC2.
+- Set up a self-hosted GitHub Runner on EC2 to handle builds securely without costs during idle.
 
-	4. Pull Your image from ECR in EC2
+---
 
-	5. Lauch your docker image in EC2
+## 🔒 Deployment Note
 
-	#Policy:
+The EC2 and ECR resources were deleted after deployment to avoid ongoing AWS charges. The app is not publicly hosted due to GPU/deep learning constraints. Local setup instructions are provided for offline testing.
 
-	1. AmazonEC2ContainerRegistryFullAccess
+---
 
-	2. AmazonEC2FullAccess
+## 📄 License
 
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-    AWS_ACCESS_KEY_ID=
-
-    AWS_SECRET_ACCESS_KEY=
-
-    AWS_REGION = us-east-1
-
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-    ECR_REPOSITORY_NAME = simple-app
-
+This project is licensed under [MIT License](LICENSE).
